@@ -11,6 +11,8 @@ const Tab = createBottomTabNavigator();
 import MenuEspacios from "./pages/Admin/Espacios/MenuEspacios";
 import Areas from "./pages/Admin/Espacios/Areas";
 import Settings from "./pages/Settings";
+import Room from "./pages/Admin/Espacios/Room";
+import Bed from "./pages/Admin/Espacios/Bed";
 
 
 function MyStack() {
@@ -18,6 +20,9 @@ function MyStack() {
         <Stack.Navigator>
             <Stack.Screen name='Inicio' component={MenuEspacios} options={{ tabBarVisible: false }} />
             <Stack.Screen name='Areas' component={Areas} />
+            <Stack.Screen name='Habitaciones' component={Room} />
+            <Stack.Screen name='Camas' component={Bed} />
+
         </Stack.Navigator>
     )
 }
@@ -25,8 +30,11 @@ function MyStack() {
 function MyTab() {
     return (
         <Tab.Navigator
-            tabBarOptions={{
-                activeTintColor: '#00B7BF', // Color del ícono cuando está seleccionado
+            screenOptions={{
+                tabBarActiveTintColor: '#00B7BF', // Color del ícono cuando está seleccionado
+                tabBarStyle: {
+                    display: 'flex' // Estilo personalizado para la barra de pestañas
+                }
             }}
         >
             <Tab.Screen

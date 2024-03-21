@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
-import { MaterialIcons } from '@expo/vector-icons';
+import Button from "../../../components/AddButton";
 
 const MenuEspacios = () => {
     const navigation = useNavigation();
@@ -25,48 +25,31 @@ const MenuEspacios = () => {
         setPisos([...pisos, nuevoPiso]);
     };
 
-    const irAPiso = (piso) => {
-    };
-
     return (
         <View style={styles.container}>
-
-            <View>
-                <View style={styles.sectionHeader}>
-                    <Text style={styles.subtitle}>Cantidad de Habitaciones</Text>
-
-                    <TouchableOpacity onPress={() => { /* lógica para editar habitaciones */ }}>
-                        <Text style={styles.editText}>Editar</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <View style={styles.ContainerHabitaciones}>
-                    <Text style={styles.Habitacionestext} >Habitaciones: ###</Text>
-
-                </View>
-            </View>
-
-            <View>
-                <Text style={styles.subtitle}>Registrar nuevo piso</Text>
-
-                <TouchableOpacity style={styles.addButton} onPress={agregarNuevoPiso}>
-                    <MaterialIcons name="add-box" size={55} color="#019EA5" />
-                    <Text style={styles.addButtonText}>Agregar</Text>
+            <View style={styles.sectionHeader}>
+                <Text style={styles.subtitle}>Cantidad de Habitaciones</Text>
+                <TouchableOpacity onPress={() => { /* lógica para editar habitaciones */ }}>
+                    <Text style={styles.editText}>Editar</Text>
                 </TouchableOpacity>
             </View>
-
-
-
-
+            <View style={styles.ContainerHabitaciones}>
+                <Text style={styles.Habitacionestext}>Habitaciones: ###</Text>
+            </View>
+            <View>
+                <Text style={styles.subtitle}>Registrar nuevo piso</Text>
+                <Button onPress={agregarNuevoPiso} />
+            </View>
             <Text style={styles.subtitle}>Listado de Pisos</Text>
             {pisos.map((piso, index) => (
-                <TouchableOpacity key={index} style={styles.button} onPress={() => navigation.navigate('Areas', { uuid : piso.uuid })}
+                <TouchableOpacity
+                    key={index}
+                    style={styles.button}
+                    onPress={() => navigation.navigate('Areas', { uuid: piso.uuid })}
                 >
                     <Text style={styles.pisoButtonText}>{piso.level}</Text>
                 </TouchableOpacity>
             ))}
-
-
         </View>
     );
 };
@@ -77,19 +60,12 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: 'white',
     },
-    title: {
-        fontSize: 22,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        marginVertical: 20,
-    },
     sectionHeader: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingHorizontal: 10,
         marginTop: 20,
-
     },
     subtitle: {
         fontSize: 18,
@@ -115,27 +91,9 @@ const styles = StyleSheet.create({
     Habitacionestext: {
         color: '#535461'
     },
-    addButton: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        paddingVertical: 10,
-        paddingHorizontal: 10,
-    },
-    addButtonText: {
-        fontSize: 18,
-        marginLeft: 10,
-        color: '#006D72',
-    },
-
     pisoButtonText: {
         fontSize: 16,
     },
-    moreButton: {
-        alignItems: 'center',
-        padding: 10,
-    },
-
     button: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -152,7 +110,6 @@ const styles = StyleSheet.create({
         height: 65,
         marginBottom: 10
     },
-    // Puedes agregar o ajustar estilos adicionales según sea necesario
 });
 
 export default MenuEspacios;

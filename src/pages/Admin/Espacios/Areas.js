@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
-import { MaterialIcons } from '@expo/vector-icons';
+import Button from "../../../components/AddButton"; // Asegúrate de importar el componente Button desde la ruta correcta
 
 const Areas = ({ route }) => {
     const { uuid } = route.params;
@@ -10,47 +10,38 @@ const Areas = ({ route }) => {
 
     useEffect(() => {
         async function fetchData() {
-          try {
-            let response = await fetch(`http://surveys.zapto.org/api/area/listar/`+uuid);
-            let json = await response.json();
-            setAreas(json);
-          } catch (error) {
-            console.error(error);
-          }
+            try {
+                let response = await fetch(`http://surveys.zapto.org/api/area/listar/` + uuid);
+                let json = await response.json();
+                setAreas(json);
+            } catch (error) {
+                console.error(error);
+            }
         }
-    
+
         if (uuid) {
-          fetchData();
+            fetchData();
         }
     }, [uuid]);
 
-    const agregarNuevaArea = () => {};
     const irAArea = (area) => {
+        // Agrega aquí la lógica para navegar a la pantalla correspondiente al 'área' seleccionada
+        console.log(`Navegar a ${area}`);
     };
 
     return (
         <View style={styles.container}>
-
             <View>
-                <Text style={styles.subtitle}>Registrar area</Text>
-
-                <TouchableOpacity style={styles.addButton} onPress={agregarNuevaArea}>
-                <MaterialIcons name="add-box" size={55} color="#019EA5" />                    
-                <Text style={styles.addButtonText}>Agregar</Text>
-                </TouchableOpacity>
+                <Text style={styles.subtitle}>Registrar área</Text>
+                <Button onPress={() => console.log('Registrar nueva área')} /> 
             </View>
 
-
-
-
-            <Text style={styles.subtitle}>Listado de Areas</Text>
+            <Text style={styles.subtitle}>Listado de Áreas</Text>
             {areas.map((area, index) => (
                 <TouchableOpacity key={index} style={styles.button} onPress={() => irAArea(area)}>
-                    <Text style={styles.pisoButtonText}>{area.name}</Text>
+                    <Text style={styles.areaButtonText}>{area.name}</Text>
                 </TouchableOpacity>
             ))}
-
-
         </View>
     );
 };
@@ -61,65 +52,11 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: 'white',
     },
-    title: {
-        fontSize: 22,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        marginVertical: 20,
-    },
-    sectionHeader: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingHorizontal: 10,
-        marginTop:20,
-
-    },
     subtitle: {
         fontSize: 18,
-        marginTop:20,
+        marginTop: 20,
         fontWeight: 'bold',
     },
-    editText: {
-        fontSize: 18,
-        marginTop:20,
-        color: 'blue',
-    },
-    ContainerHabitaciones: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: '#E6E6E6',
-        marginHorizontal: 10,
-        marginTop: 20,
-        padding: 10,
-        height: 65,
-        width: 180,
-        marginBottom: 20
-    },
-    Habitacionestext: {
-        color: '#535461'
-    },
-    addButton: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        paddingVertical: 10,
-        paddingHorizontal: 10,
-    },
-    addButtonText: {
-        fontSize: 18,
-        marginLeft: 10,
-        color: '#006D72',
-    },
-
-    pisoButtonText: {
-        fontSize: 16,
-    },
-    moreButton: {
-        alignItems: 'center',
-        padding: 10,
-    },
-
     button: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -136,7 +73,9 @@ const styles = StyleSheet.create({
         height: 65,
         marginBottom: 10
     },
-    // Puedes agregar o ajustar estilos adicionales según sea necesario
+    areaButtonText: {
+        fontSize: 16,
+    },
 });
 
 export default Areas;
