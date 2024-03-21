@@ -1,18 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from '@expo/vector-icons';
 
-const Areas = () => {
+const Areas = ({ route }) => {
+    const { uuid } = route.params;
     const navigation = useNavigation();
-    const [pisos, setPisos] = useState(['Piso #1', 'Piso #2', 'Piso #3']);
+    const [areas, setAreas] = useState([]);
 
-    const agregarNuevoPiso = () => {
-        const nuevoPiso = `Piso #${pisos.length + 1}`;
-        setPisos([...pisos, nuevoPiso]);
-    };
+    useEffect(() => {
+        async function fetchData() {
+          try {
+            let response = await fetch(`http://surveys.zapto.org/api/area/listar/`+uuid);
+            let json = await response.json();
+            setAreas(json);
+          } catch (error) {
+            console.error(error);
+          }
+        }
+    
+        if (uuid) {
+          fetchData();
+        }
+    }, [uuid]);
 
-    const irAPiso = (piso) => {
+    const agregarNuevaArea = () => {};
+    const irAArea = (area) => {
     };
 
     return (
@@ -21,7 +34,7 @@ const Areas = () => {
             <View>
                 <Text style={styles.subtitle}>Registrar area</Text>
 
-                <TouchableOpacity style={styles.addButton} onPress={agregarNuevoPiso}>
+                <TouchableOpacity style={styles.addButton} onPress={agregarNuevaArea}>
                 <MaterialIcons name="add-box" size={55} color="#019EA5" />                    
                 <Text style={styles.addButtonText}>Agregar</Text>
                 </TouchableOpacity>
@@ -31,9 +44,9 @@ const Areas = () => {
 
 
             <Text style={styles.subtitle}>Listado de Areas</Text>
-            {pisos.map((piso, index) => (
-                <TouchableOpacity key={index} style={styles.button} onPress={() => irAPiso(piso)}>
-                    <Text style={styles.pisoButtonText}>{piso}</Text>
+            {areas.map((area, index) => (
+                <TouchableOpacity key={index} style={styles.button} onPress={() => irAArea(area)}>
+                    <Text style={styles.pisoButtonText}>{area.name}</Text>
                 </TouchableOpacity>
             ))}
 
