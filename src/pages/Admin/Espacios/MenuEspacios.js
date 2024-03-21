@@ -1,11 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from '@expo/vector-icons';
 
 const MenuEspacios = () => {
     const navigation = useNavigation();
-    const [pisos, setPisos] = useState(['Piso #1', 'Piso #2', 'Piso #3']);
+    const [pisos, setPisos] = useState([]);
+
+    useEffect(() => {
+        async function fetchPisos() {
+            try {
+                let response = await fetch('https://surveys.zapto.org/api/floor/listar');
+                let json = await response.json();
+                setPisos(json);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        fetchPisos();
+    }, []);
 
     const agregarNuevoPiso = () => {
         const nuevoPiso = `Piso #${pisos.length + 1}`;
@@ -47,9 +60,9 @@ const MenuEspacios = () => {
 
             <Text style={styles.subtitle}>Listado de Pisos</Text>
             {pisos.map((piso, index) => (
-                <TouchableOpacity key={index} style={styles.button} onPress={() => navigation.navigate('Areas')}
+                <TouchableOpacity key={index} style={styles.button} onPress={() => navigation.navigate('Areas', { uuid : piso.uuid })}
                 >
-                    <Text style={styles.pisoButtonText}>{piso}</Text>
+                    <Text style={styles.pisoButtonText}>{piso.level}</Text>
                 </TouchableOpacity>
             ))}
 
