@@ -14,6 +14,8 @@ import ChooseLogin from './pages/ChooseLogin'
 
 import CodePatient from "./pages/Patient/CodePatient";
 
+//Control Admin 
+import RegistroDepartment from "./pages/Admin/Empleados/RegistroDepartment";
 
 // Espacios de admin
 import MenuEspacios from "./pages/Admin/Espacios/MenuEspacios";
@@ -66,8 +68,10 @@ function MyStack() {
         >
             <Stack.Screen name='ChooseLogin' component={ChooseLogin} options={{ headerShown: false }} />
             <Stack.Screen name='Login' component={Login} options={{ headerShown: false }} />
+
             <Stack.Screen name='CodePatient' component={CodePatient} options={{ headerShown: false }} />
 
+            <Stack.Screen name='RegistroDepartment' component={RegistroDepartment} options={{ headerShown: false }} />
 
             <Stack.Screen name='Inicio' component={MainTab} options={{ tabBarVisible: false }} />
             <Stack.Screen name='Areas' component={Areas} />

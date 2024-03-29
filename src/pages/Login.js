@@ -42,7 +42,7 @@ const Login = () => {
                 </View>
             </View>
 
-            <Btn title={'Iniciar sesión'} onPress={() => navigation.navigate('Inicio')} />
+            <Btn title={'Iniciar sesión'} onPress={() => navigation.navigate('RegistroDepartment')} />
         </View>
     )
 }
