@@ -1,26 +1,48 @@
-import React from "react";
-import { Text, View, Image, StyleSheet } from 'react-native';
-
-import Button from "../components/PrimaryButton";
-import Btn from "../components/SecondaryButton";
+import React, { useState } from 'react';
+import { View, StyleSheet, Text } from "react-native";
+import Btn from '../components/PrimaryButton'
+import { useNavigation } from "@react-navigation/native";
+import { FontAwesome5 } from '@expo/vector-icons';
+import InputComponent from '../components/Input';
 
 const Login = () => {
+    const navigation = useNavigation();
+    const [inputValue, setInputValue] = useState('');
+
+    const handleInputChange = (text) => {
+        setInputValue(text);
+        console.log(text);
+    };
+
     return (
         <View style={styles.container}>
-            <View style={styles.containerImg}>
-                <Image style={styles.img} source={require('.././assets/medicine.png')} />
+            <View>
+                <FontAwesome5 name="hospital-user" size={130} color="#00DAE4" />
             </View>
 
-            <View style={styles.containertex}>
-                <Text style={styles.txtTitle}>Elige cómo iniciar sesión:</Text>
-                <View style={styles.containerDescrip}>
-                    <Text style={styles.descrip}>Da el primer paso hacia el cuidado de la salud y comencemos esta jornada juntos hacia el bienestar.</Text>
+            <View style={styles.containerTxt} >
+                <Text style={styles.Title} >Iniciar sesión</Text>
+            </View>
+
+            <View style={styles.containerInf}>
+                <View>
+                    <Text style={styles.Txt}>Correo electrónico</Text>
+                    <InputComponent
+                        placeholderText="Ingrese su correo electrónico"
+                        onInputChange={handleInputChange}
+                    />
+                </View>
+
+                <View style={styles.Txt}>
+                    <Text>Contraseña</Text>
+                    <InputComponent
+                        placeholderText="Ingrese su contraseña"
+                        onInputChange={handleInputChange}
+                    />
                 </View>
             </View>
 
-            <Button  title="Paciente" />
-            <Btn  title="Otro" />
-
+            <Btn title={'Iniciar sesión'} onPress={() => navigation.navigate('Inicio')} />
         </View>
     )
 }
@@ -30,39 +52,26 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 10,
         justifyContent: 'center',
-        alignItems: 'center'
-    },
-    containerImg: {
-        width: '100%',
-        height: '50%',
-        justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: 'white'
     },
-    img: {
-        width: '100%',
-        height: '100%',
-        resizeMode: 'stretch',
-    },
-    containertex: {
-        justifyContent: 'center',
+    containerTxt: {
+        width: '80%',
+        height: '15%',
         alignItems: 'center',
-        width: '100%',
-        marginBottom:0
+        justifyContent: 'center',
     },
-    txtTitle: {
-        fontSize: 23, // Tamaño de la letra
+    containerInf: {
+        backgroundColor: 'transparent',
+        width: '80%',
+        marginBottom: 30
+    },
+    Txt: {
+        marginTop: 10
+    },
+    Title: {
+        fontSize: 24,
         fontWeight: 'bold',
-        marginBottom: 20
-    },
-    containerDescrip: {
-        width: '90%',
-        justifyContent: 'center',
-    },
-    descrip:{
-        textAlign: 'center',
-        fontSize: 15, 
-        color:'#838383'
-
     }
 
 })

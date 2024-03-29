@@ -1,10 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 
-const Room = () => {
+const Room = ({ route }) => {
+    const { area_uuid } = route.params;
     const navigation = useNavigation();
-    const [rooms, setRooms] = useState(['Habitación #1', 'Habitación #2', 'Habitación #3']);
+    const [rooms, setRooms] = useState([]);
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                let response = await fetch(`https://surveys.zapto.org/api/room/listar/` + area_uuid);
+                let json = await response.json();
+                setRooms(json);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        if (area_uuid) {
+            fetchData();
+        }
+    }, [area_uuid]);
 
     return (
         <View style={styles.container}>
@@ -15,7 +32,7 @@ const Room = () => {
                     style={styles.button}
                     onPress={() => navigation.navigate('Camas')}
                 >
-                    <Text style={styles.roomButtonText}>{room}</Text>
+                    <Text style={styles.roomButtonText}>{room.number}</Text>
                 </TouchableOpacity>
             ))}
         </View>

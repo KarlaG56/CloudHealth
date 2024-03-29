@@ -11,7 +11,7 @@ const Areas = ({ route }) => {
     useEffect(() => {
         async function fetchData() {
             try {
-                let response = await fetch(`http://surveys.zapto.org/api/area/listar/` + uuid);
+                let response = await fetch(`https://surveys.zapto.org/api/area/listar/` + uuid);
                 let json = await response.json();
                 setAreas(json);
             } catch (error) {
@@ -25,7 +25,6 @@ const Areas = ({ route }) => {
     }, [uuid]);
 
     const irAArea = (area) => {
-        // Agrega aquí la lógica para navegar a la pantalla correspondiente al 'área' seleccionada
         console.log(`Navegar a ${area}`);
     };
 
@@ -38,7 +37,7 @@ const Areas = ({ route }) => {
 
             <Text style={styles.subtitle}>Listado de Áreas</Text>
             {areas.map((area, index) => (
-                <TouchableOpacity key={index} style={styles.button} onPress={() => irAArea(area)}>
+                <TouchableOpacity key={index} style={styles.button} onPress={() => navigation.navigate('Habitaciones', { area_uuid: area.uuid })}>
                     <Text style={styles.areaButtonText}>{area.name}</Text>
                 </TouchableOpacity>
             ))}
