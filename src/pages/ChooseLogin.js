@@ -20,7 +20,7 @@ const ChooseLogin = () => {
                 </View>
             </View>
 
-            <Button title="Paciente" />
+            <Button title="Paciente" onPress={() => navigation.navigate('CodePatient')}  />
             <Btn title="Otro" onPress={() => navigation.navigate('Login')} />
 
         </View>

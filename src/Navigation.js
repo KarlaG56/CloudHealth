@@ -12,6 +12,7 @@ const Tab = createBottomTabNavigator();
 import Login from "./pages/Login";
 import ChooseLogin from './pages/ChooseLogin'
 
+import CodePatient from "./pages/Patient/CodePatient";
 
 
 // Espacios de admin
@@ -65,6 +66,9 @@ function MyStack() {
         >
             <Stack.Screen name='ChooseLogin' component={ChooseLogin} options={{ headerShown: false }} />
             <Stack.Screen name='Login' component={Login} options={{ headerShown: false }} />
+            <Stack.Screen name='CodePatient' component={CodePatient} options={{ headerShown: false }} />
+
+
             <Stack.Screen name='Inicio' component={MainTab} options={{ tabBarVisible: false }} />
             <Stack.Screen name='Areas' component={Areas} />
             <Stack.Screen name='Habitaciones' component={Room} />
