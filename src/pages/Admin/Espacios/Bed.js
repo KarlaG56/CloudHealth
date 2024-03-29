@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
-import Button from "../../../components/AddButton"; // Asegúrate de importar el componente Button desde la ruta correcta
-
+import Button from "../../../components/AddButton"; 
 const Bed = () => {
     const navigation = useNavigation();
-    const [camas, setCamas] = useState(['Cama #1', 'Cama #2', 'Cama #3']); // Utiliza el estado 'camas' en lugar de 'areas'
-
-    // Función para manejar la navegación a una cama específica
+    const [camas, setCamas] = useState(['Cama #1', 'Cama #2', 'Cama #3']); 
     const irACama = (cama) => {
-        // Agrega aquí la lógica para navegar a la pantalla correspondiente a la 'cama' seleccionada
         console.log(`Navegar a ${cama}`);
     };
 

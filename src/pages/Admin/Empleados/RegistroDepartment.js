@@ -2,8 +2,12 @@ import React from "react";
 import { View, StyleSheet, Text, Image } from "react-native";
 import Btn_primary from '../../../components/PrimaryButton';
 import Btn_second from '../../../components/SecondaryButton';
+import { useNavigation } from "@react-navigation/native";
+
 
 const RegistroDepartment = () => {
+    const navigation = useNavigation();
+
     return (
         <View style={styles.container}>
             <View style={styles.containerTxt}>
@@ -14,8 +18,8 @@ const RegistroDepartment = () => {
                 <Image style={styles.img} source={require('../../../assets/department.png')} />
             </View>
 
-            <Btn_primary title={'Agregar'} />
-            <Btn_second title={'Acceder al menu principal'} />
+            <Btn_primary title={'Agregar'} onPress={() => navigation.navigate('')} />
+            <Btn_second title={'Acceder al menu principal'} onPress={() => navigation.navigate('MenuAdminstrativo') } />
         </View>
     )
 }
