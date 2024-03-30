@@ -13,7 +13,9 @@ const MenuAdminstrativo = () => {
             
             <View>
                 <Text style={styles.subtitle}>Registrar nuevo empleado</Text>
-                <AddButton  />
+                <AddButton 
+                onPress={() => navigation.navigate('Registro de Empleado')} 
+                />
             </View>
             <Text style={styles.subtitle}>Control Administrativo</Text>
 

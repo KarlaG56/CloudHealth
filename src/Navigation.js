@@ -15,12 +15,14 @@ import CodePatient from "./pages/Patient/CodePatient";
 //Control Admin 
 import RegistroDepartment from "./pages/Admin/Empleados/RegistroDepartment";
 import MenuAdminstrativo from "./pages/Admin/Empleados/MenuAdministrativo";
+import RegisterEmployee from "./pages/Admin/Empleados/RegisterEmployee";
 import ListDoc from "./pages/Admin/Empleados/ListDoctor";
 import ListNurse from "./pages/Admin/Empleados/ListNurse";
 import ListAdmin from "./pages/Admin/Empleados/ListAdmin";
 import ListDepa from "./pages/Admin/Empleados/ListDepartment";
 
 // Espacios de admin
+import CantRoom from "./pages/Admin/Espacios/CantRoom";
 import MenuEspacios from "./pages/Admin/Espacios/MenuEspacios";
 import Areas from "./pages/Admin/Espacios/Areas";
 import Settings from "./pages/Settings";
@@ -70,12 +72,13 @@ function MyStack() {
         <Stack.Navigator
             initialRouteName="ChooseLogin"
         >
-            <Stack.Screen name='ChooseLogin' component={ChooseLogin} options={{ headerShown: false }} />
+            <Stack.Screen name='ChooseLogin' component={ ChooseLogin} options={{ headerShown: false }} />
             <Stack.Screen name='Login' component={Login} options={{ headerShown: false }} />
 
             <Stack.Screen name='CodePatient' component={CodePatient} options={{ headerShown: false }} />
 
             <Stack.Screen name='RegistroDepartment' component={RegistroDepartment} options={{ headerShown: false }} />
+            <Stack.Screen name='Registro de Empleado' component={RegisterEmployee} />
             <Stack.Screen name='MenuAdminstrativo' component={MenuAdminstrativo} options={{ headerShown: false }} />
             <Stack.Screen name='Inicio' component={MainTab} options={{ tabBarVisible: false }} />
             <Stack.Screen name='Doctores' component={ListDoc} options={{ tabBarVisible: false }} />
@@ -83,6 +86,7 @@ function MyStack() {
             <Stack.Screen name='Administradores' component={ListAdmin} options={{ tabBarVisible: false }} />
             <Stack.Screen name='Departamentos' component={ListDepa} options={{ tabBarVisible: false }} />
 
+            <Stack.Screen name='CantRoom' component={CantRoom} options={{ tabBarVisible: false }} />
             <Stack.Screen name='Areas' component={Areas} />
             <Stack.Screen name='Habitaciones' component={Room} />
             <Stack.Screen name='Camas' component={Bed} />
