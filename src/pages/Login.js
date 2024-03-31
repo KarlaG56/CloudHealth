@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text } from "react-native";
-import Btn from '../components/PrimaryButton'
+import Btn from '../components/PrimaryButton';
 import { useNavigation } from "@react-navigation/native";
 import { FontAwesome5 } from '@expo/vector-icons';
 import InputComponent from '../components/Input';
@@ -42,7 +42,8 @@ const Login = () => {
                 </View>
             </View>
 
-            <Btn title={'Iniciar sesión'} onPress={() => navigation.navigate('RegistroDepartment')} />
+            {/* Navega a MainTab cuando se presione el botón */}
+            <Btn title={'Iniciar sesión'} onPress={() => navigation.navigate('MainTab')} />
         </View>
     )
 }
@@ -73,7 +74,6 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
     }
-
-})
+});
 
 export default Login;

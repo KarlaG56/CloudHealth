@@ -38,7 +38,9 @@ const MenuEspacios = () => {
             </View>
             <View>
                 <Text style={styles.subtitle}>Registrar nuevo piso</Text>
-                <Button onPress={agregarNuevoPiso} />
+                <Button
+                    onPress={() => navigation.navigate('Registro de Piso')}
+                />
             </View>
             <Text style={styles.subtitle}>Listado de Pisos</Text>
             {pisos.map((piso, index) => (
