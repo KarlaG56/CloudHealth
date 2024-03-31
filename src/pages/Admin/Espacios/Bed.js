@@ -13,7 +13,7 @@ const Bed = () => {
         <View style={styles.container}>
             <View>
                 <Text style={styles.subtitle}>Registrar cama</Text>
-                <Button onPress={() => console.log('Registrar nueva cama')} /> 
+                <Button onPress={() => navigation.navigate('Registro de Camas')} /> 
             </View>
 
             <Text style={styles.subtitle}>Listado de Camas</Text>

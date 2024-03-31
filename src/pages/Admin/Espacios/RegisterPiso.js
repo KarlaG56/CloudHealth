@@ -39,7 +39,8 @@ const RegisterPiso = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 0
+        padding: 0,
+        backgroundColor:'white'
     },
     containerTxt: {
         width: '80%',

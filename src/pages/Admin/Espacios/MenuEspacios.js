@@ -29,7 +29,7 @@ const MenuEspacios = () => {
         <View style={styles.container}>
             <View style={styles.sectionHeader}>
                 <Text style={styles.subtitle}>Cantidad de Habitaciones</Text>
-                <TouchableOpacity onPress={() => { /* lógica para editar habitaciones */ }}>
+                <TouchableOpacity onPress={() => navigation.navigate('CantRoom')}>
                     <Text style={styles.editText}>Editar</Text>
                 </TouchableOpacity>
             </View>

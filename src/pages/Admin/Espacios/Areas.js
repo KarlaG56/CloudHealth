@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
-import Button from "../../../components/AddButton"; // Asegúrate de importar el componente Button desde la ruta correcta
+import Button from "../../../components/AddButton"; 
 
 const Areas = ({ route }) => {
     const { uuid } = route.params;
@@ -32,7 +32,7 @@ const Areas = ({ route }) => {
         <View style={styles.container}>
             <View>
                 <Text style={styles.subtitle}>Registrar área</Text>
-                <Button onPress={() => console.log('Registrar nueva área')} /> 
+                <Button onPress={() => navigation.navigate('Registro de Area')} /> 
             </View>
 
             <Text style={styles.subtitle}>Listado de Áreas</Text>

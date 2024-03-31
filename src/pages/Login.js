@@ -41,9 +41,7 @@ const Login = () => {
                     />
                 </View>
             </View>
-
-            {/* Navega a MainTab cuando se presione el botón */}
-            <Btn title={'Iniciar sesión'} onPress={() => navigation.navigate('MainTab')} />
+            <Btn title={'Ingresar'} onPress={() => navigation.navigate('CantBed')} />
         </View>
     )
 }

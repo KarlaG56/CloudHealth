@@ -23,12 +23,17 @@ import ListDepa from "./pages/Admin/Empleados/ListDepartment";
 
 // Espacios de admin
 import CantRoom from "./pages/Admin/Espacios/CantRoom";
+import CantBed from "./pages/Admin/Espacios/CantBed"
 import MenuEspacios from "./pages/Admin/Espacios/MenuEspacios";
 import RegisterPiso from "./pages/Admin/Espacios/RegisterPiso";
+import RegisterArea from "./pages/Admin/Espacios/RegisterArea";
 import Areas from "./pages/Admin/Espacios/Areas";
 import Settings from "./pages/Settings";
 import Room from "./pages/Admin/Espacios/Room";
 import Bed from "./pages/Admin/Espacios/Bed";
+
+//Doctor
+import ListPatient from "./pages/Doctor/ListPatient";
 
 function MainTab() {
     return (
@@ -48,7 +53,6 @@ function MainTab() {
                     tabBarIcon: ({ color, size, focused }) => (
                         <Feather name="home" size={size} color={focused ? '#00B7BF' : color} />
                     ),
-                    headerShown: false
                 }}
             />
 
@@ -74,7 +78,9 @@ function MyStack() {
         >
             <Stack.Screen name='ChooseLogin' component={ ChooseLogin} options={{ headerShown: false }} />
             <Stack.Screen name='Login' component={Login} options={{ headerShown: false }} />
+
             <Stack.Screen name='CodePatient' component={CodePatient} options={{ headerShown: false }} />
+
             <Stack.Screen name='RegistroDepartment' component={RegistroDepartment} options={{ headerShown: false }} />
             <Stack.Screen name='Registro de Empleado' component={RegisterEmployee} />
             <Stack.Screen name='MenuAdminstrativo' component={MenuAdminstrativo} options={{ headerShown: false }} />
@@ -83,11 +89,16 @@ function MyStack() {
             <Stack.Screen name='Enfermeras' component={ListNurse} options={{ headerShown: false }} />
             <Stack.Screen name='Administradores' component={ListAdmin} options={{ headerShown: false }} />
             <Stack.Screen name='Departamentos' component={ListDepa} options={{ headerShown: false }} />
+
+
             <Stack.Screen name='Registro de Piso' component={RegisterPiso} />
-            <Stack.Screen name='CantRoom' component={CantRoom} options={{ headerShown: false }} />
+            <Stack.Screen name='Registro de Area' component={RegisterArea} />
+            <Stack.Screen name='CantBed' component={CantBed} options={{ headerShown: false }} />
+            <Stack.Screen name='Registro de Camas' component={CantRoom} options={{ headerShown: false }} />
             <Stack.Screen name='Areas' component={Areas} />
             <Stack.Screen name='Habitaciones' component={Room} />
             <Stack.Screen name='Camas' component={Bed} />
+
            
         </Stack.Navigator>
     )
@@ -96,7 +107,7 @@ function MyStack() {
 export default function Navigation() {
     return (
         <NavigationContainer>
-            <MyStack />
+            <MainTab />
         </NavigationContainer>
     );
 }
