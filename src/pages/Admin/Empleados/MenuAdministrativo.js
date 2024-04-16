@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import AddButton from "../../../components/AddButton";
-import Button from "../../../components/Button";
+import Button from "../../../components/TertiaryButton";
 
 const MenuAdminstrativo = () => {
     const navigation = useNavigation();

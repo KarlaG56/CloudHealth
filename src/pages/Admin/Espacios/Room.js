@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
+import Button from "../../../components/AddButton";
+
 
 const Room = ({ route }) => {
     const { area_uuid } = route.params;
@@ -10,9 +12,11 @@ const Room = ({ route }) => {
     useEffect(() => {
         async function fetchData() {
             try {
-                let response = await fetch(`https://surveys.zapto.org/api/room/listar/` + area_uuid);
+                let response = await fetch(`http://192.168.189.218:5000/habitaciones/` + area_uuid);
                 let json = await response.json();
-                setRooms(json);
+                if (json.status == 'Success'){
+                    setRooms(json.habitaciones);
+                }
             } catch (error) {
                 console.error(error);
             }
@@ -25,6 +29,12 @@ const Room = ({ route }) => {
 
     return (
         <View style={styles.container}>
+
+            <View>
+                <Text style={styles.subtitle}>Registrar de habitaciones</Text>
+                <Button onPress={() => navigation.navigate('Registro de Camas', { area_uuid: area_uuid })} />
+            </View>
+
             <Text style={styles.subtitle}>Listado de habitaciones</Text>
             {rooms.map((room, index) => (
                 <TouchableOpacity

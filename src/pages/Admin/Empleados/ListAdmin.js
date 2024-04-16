@@ -1,7 +1,7 @@
 import React from "react";
 import { Feather } from '@expo/vector-icons';
 import { StyleSheet, View, TextInput } from "react-native";
-import List from "../../List";
+import List from "../../../Templates/ListTemplate";
 
 const ListAdmin = () => {
     const [searchText, setSearchText] = React.useState('');

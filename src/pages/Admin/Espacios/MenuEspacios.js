@@ -7,16 +7,23 @@ const MenuEspacios = () => {
     const navigation = useNavigation();
     const [pisos, setPisos] = useState([]);
 
-    useEffect(() => {
-        async function fetchPisos() {
-            try {
-                let response = await fetch('https://surveys.zapto.org/api/floor/listar');
-                let json = await response.json();
-                setPisos(json);
-            } catch (error) {
-                console.error(error);
+    const fetchPisos = async () => {
+        try {
+            let response = await fetch('http://192.168.189.218:5000/floors/');
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
+
+            let json = await response.json();
+            setPisos(json.pisos);
+        } catch (error) {
+            console.error('Error fetching data:', error.message);
         }
+    };
+
+    useEffect(() => {
+        setPisos([])
         fetchPisos();
     }, []);
 
@@ -27,19 +34,12 @@ const MenuEspacios = () => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.sectionHeader}>
-                <Text style={styles.subtitle}>Cantidad de Habitaciones</Text>
-                <TouchableOpacity onPress={() => navigation.navigate('CantRoom')}>
-                    <Text style={styles.editText}>Editar</Text>
-                </TouchableOpacity>
-            </View>
-            <View style={styles.ContainerHabitaciones}>
-                <Text style={styles.Habitacionestext}>Habitaciones: ###</Text>
-            </View>
+            
+            
             <View>
                 <Text style={styles.subtitle}>Registrar nuevo piso</Text>
                 <Button
-                    onPress={() => navigation.navigate('Registro de Piso')}
+                    onPress={() => navigation.navigate('RePiso')}
                 />
             </View>
             <Text style={styles.subtitle}>Listado de Pisos</Text>

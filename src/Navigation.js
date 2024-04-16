@@ -4,26 +4,20 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
-
-//Login
+// Importando los componentes de las páginas
 import Login from "./pages/Login";
 import ChooseLogin from './pages/ChooseLogin';
 import CodePatient from "./pages/Patient/CodePatient";
-
-//Control Admin 
 import RegistroDepartment from "./pages/Admin/Empleados/RegistroDepartment";
 import MenuAdminstrativo from "./pages/Admin/Empleados/MenuAdministrativo";
 import RegisterEmployee from "./pages/Admin/Empleados/RegisterEmployee";
 import ListDoc from "./pages/Admin/Empleados/ListDoctor";
 import ListNurse from "./pages/Admin/Empleados/ListNurse";
 import ListAdmin from "./pages/Admin/Empleados/ListAdmin";
+import InfEmployee from "./pages/Admin/Empleados/Inf_employee";
 import ListDepa from "./pages/Admin/Empleados/ListDepartment";
-
-// Espacios de admin
 import CantRoom from "./pages/Admin/Espacios/CantRoom";
-import CantBed from "./pages/Admin/Espacios/CantBed"
+import CantBed from "./pages/Admin/Espacios/CantBed";
 import MenuEspacios from "./pages/Admin/Espacios/MenuEspacios";
 import RegisterPiso from "./pages/Admin/Espacios/RegisterPiso";
 import RegisterArea from "./pages/Admin/Espacios/RegisterArea";
@@ -32,30 +26,76 @@ import Settings from "./pages/Settings";
 import Room from "./pages/Admin/Espacios/Room";
 import Bed from "./pages/Admin/Espacios/Bed";
 
-//Doctor
-import ListPatient from "./pages/Doctor/ListPatient";
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+// Estilos para la tabBar
+const styles = {
+    tabBar: {
+        backgroundColor: '#FFFFFF',
+        borderTopColor: 'transparent',
+    },
+    tabBarItem: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+};
+
+function MyStack() {
+    return (
+        <Stack.Navigator initialRouteName="MenuEspacios">
+            <Stack.Screen name='MenuEspacios' component={MenuEspacios} options={{ headerShown: false }} />
+            <Stack.Screen name='ChooseLogin' component={ChooseLogin} options={{ headerShown: false }} />
+            <Stack.Screen name='Login' component={Login} options={{ headerShown: false }} />
+            <Stack.Screen name='CodePatient' component={CodePatient} options={{ headerShown: false }} />
+            <Stack.Screen name='RegistroDepartment' component={RegistroDepartment} options={{ headerShown: false }} />
+            <Stack.Screen name='Registro de Empleado' component={RegisterEmployee} />
+            <Stack.Screen name='Doctores' component={ListDoc} options={{ tabBarVisible: false }} />
+            <Stack.Screen name='Enfermeras' component={ListNurse} options={{ headerShown: false }} />
+            <Stack.Screen name='Administradores' component={ListAdmin} />
+            <Stack.Screen name='Informacion Empleado' component={InfEmployee}  />
+
+            <Stack.Screen name='Departamentos' component={ListDepa} options={{ headerShown: false }} />
+            <Stack.Screen name='RePiso' component={RegisterPiso} options={{ headerShown: false }} />
+            <Stack.Screen name='Registro de Area' component={RegisterArea} />
+            <Stack.Screen name='CantBed' component={CantBed} options={{ headerShown: false }} />
+            <Stack.Screen name='Registro de Camas' component={CantRoom} options={{ headerShown: false }} />
+            <Stack.Screen name='Areas' component={Areas} options={{ headerShown: false }} />
+            <Stack.Screen name='Habitaciones' component={Room} options={{ headerShown: false }} />
+            <Stack.Screen name='Camas' component={Bed} />
+        </Stack.Navigator>
+    );
+}
 
 function MainTab() {
     return (
         <Tab.Navigator
             screenOptions={{
-                tabBarActiveTintColor: '#00B7BF', 
-                tabBarStyle: {
-                    display: 'flex' 
-                }
+                tabBarStyle: styles.tabBar,
+                tabBarItemStyle: styles.tabBarItem,
             }}
         >
             <Tab.Screen
                 name="Menu Espacios"
-                component={MenuEspacios}
+                component={MyStack}
                 options={{
                     tabBarLabel: () => null,
                     tabBarIcon: ({ color, size, focused }) => (
                         <Feather name="home" size={size} color={focused ? '#00B7BF' : color} />
+                    ), headerShown: false
+
+                }}
+            />
+            <Tab.Screen
+                name="Administrativo"
+                component={MenuAdminstrativo}
+                options={{
+                    tabBarLabel: () => null,
+                    tabBarIcon: ({ color, size, focused }) => (
+                        <Feather name="users" size={size} color={focused ? '#00B7BF' : color} />
                     ),
                 }}
             />
-
             <Tab.Screen
                 name="Configuración"
                 component={Settings}
@@ -66,42 +106,8 @@ function MainTab() {
                     ),
                 }}
             />
-            
         </Tab.Navigator>
     );
-}
-
-function MyStack() {
-    return (
-        <Stack.Navigator
-            initialRouteName="ChooseLogin"
-        >
-            <Stack.Screen name='ChooseLogin' component={ ChooseLogin} options={{ headerShown: false }} />
-            <Stack.Screen name='Login' component={Login} options={{ headerShown: false }} />
-
-            <Stack.Screen name='CodePatient' component={CodePatient} options={{ headerShown: false }} />
-
-            <Stack.Screen name='RegistroDepartment' component={RegistroDepartment} options={{ headerShown: false }} />
-            <Stack.Screen name='Registro de Empleado' component={RegisterEmployee} />
-            <Stack.Screen name='MenuAdminstrativo' component={MenuAdminstrativo} options={{ headerShown: false }} />
-            <Stack.Screen name='Inicio' component={MainTab} options={{ headerShown: false }} />
-            <Stack.Screen name='Doctores' component={ListDoc} options={{ headerShown: false }} />
-            <Stack.Screen name='Enfermeras' component={ListNurse} options={{ headerShown: false }} />
-            <Stack.Screen name='Administradores' component={ListAdmin} options={{ headerShown: false }} />
-            <Stack.Screen name='Departamentos' component={ListDepa} options={{ headerShown: false }} />
-
-
-            <Stack.Screen name='Registro de Piso' component={RegisterPiso} />
-            <Stack.Screen name='Registro de Area' component={RegisterArea} />
-            <Stack.Screen name='CantBed' component={CantBed} options={{ headerShown: false }} />
-            <Stack.Screen name='Registro de Camas' component={CantRoom} options={{ headerShown: false }} />
-            <Stack.Screen name='Areas' component={Areas} />
-            <Stack.Screen name='Habitaciones' component={Room} />
-            <Stack.Screen name='Camas' component={Bed} />
-
-           
-        </Stack.Navigator>
-    )
 }
 
 export default function Navigation() {

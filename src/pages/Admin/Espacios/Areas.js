@@ -11,9 +11,9 @@ const Areas = ({ route }) => {
     useEffect(() => {
         async function fetchData() {
             try {
-                let response = await fetch(`https://surveys.zapto.org/api/area/listar/` + uuid);
+                let response = await fetch(`http://192.168.189.218:5000/areas/piso/` + uuid);
                 let json = await response.json();
-                setAreas(json);
+                setAreas(json.areas);
             } catch (error) {
                 console.error(error);
             }
@@ -32,7 +32,7 @@ const Areas = ({ route }) => {
         <View style={styles.container}>
             <View>
                 <Text style={styles.subtitle}>Registrar área</Text>
-                <Button onPress={() => navigation.navigate('Registro de Area')} /> 
+                <Button onPress={() => navigation.navigate('Registro de Area', {floor_uuid: uuid})} /> 
             </View>
 
             <Text style={styles.subtitle}>Listado de Áreas</Text>

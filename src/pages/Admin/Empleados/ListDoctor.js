@@ -1,11 +1,17 @@
 import React from "react";
 import { Feather } from '@expo/vector-icons';
 import { StyleSheet, View, TextInput } from "react-native";
-import List from "../../List";
+import List from "../../../Templates/ListTemplate";
+import { useNavigation } from "@react-navigation/native";
 
 const ListDoc = () => {
     const [searchText, setSearchText] = React.useState('');
     const data = ["Juan", "María", "Carlos", "Ana", "Juan", "María", "Carlos", "Ana"];
+    const navigation = useNavigation();
+
+    const handlePressItem = (name) => {
+        navigation.navigate('Informacion Empleado', { nombre: name, description: 'Descripción del Empleado, cargo, etc.' });
+    };
 
     return (
         <View style={styles.container}>
@@ -19,6 +25,7 @@ const ListDoc = () => {
             </View>
             <List 
                 title={'Doctores'}
+                onPressCallback={handlePressItem}
                 searchText={searchText}
                 data={data.filter(name =>
                     name.toLowerCase().includes(searchText.toLowerCase())

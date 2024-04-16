@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
-import { View, TextInput, StyleSheet } from 'react-native';
+import React from 'react';
+import { TextInput, StyleSheet } from 'react-native';
 
-const InputComponent = () => {
-  const [text, setText] = useState('');
+const InputComponent = ({ value, onChangeText }) => {
 
   return (
       <TextInput
         style={styles.input}
-        onChangeText={setText}
-        value={text}
+        value={value}
+        onChangeText={onChangeText}
       />
   );
 };

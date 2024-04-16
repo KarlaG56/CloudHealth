@@ -1,10 +1,33 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, TextInput } from "react-native";
+import { StyleSheet, View, Text, TextInput, Alert} from "react-native";
 import BtnPry from '../../../components/PrimaryButton';
 import InputComponent from "../../../components/Input";
 
-const RegisterArea = () => {
+const RegisterArea = ({route}) => {
+    const {floor_uuid} = route.params;
     const [inputValue, setInputValue] = useState('');
+
+    const handleSubmit = () =>{
+        if (!inputValue.trim()) {
+            Alert.alert('Validación', 'Por favor, ingrese el nombre del piso.', inputValue);
+            return;
+        }
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: inputValue, floor_uuid: floor_uuid }),
+        };
+        fetch('http://192.168.189.218:5000/areas/', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                Alert.alert('Éxito', 'Piso registrado correctamente.');
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Alert.alert('Error', 'Hubo un problema al registrar el piso.');
+            });
+    }
 
     const handleInputChange = (text) => {
         setInputValue(text);
@@ -21,30 +44,10 @@ const RegisterArea = () => {
 
                 <View style={styles.containerTxt}>
                     <Text>Nombre</Text>
-                    <InputComponent onInputChange={handleInputChange} />
+                    <InputComponent onChangeText={handleInputChange} value={inputValue}/>
                 </View>
-
-                <View style={styles.containerTxt}>
-                    <Text>Rango de habitaciones</Text>
-                    <View style={styles.containerRange}>
-                        <TextInput
-                            onInputChange={handleInputChange}
-                            style={styles.input}
-                        />
-                        <View style={styles.txt}>
-                            <Text >Al</Text>
-
-                        </View>
-                        <TextInput
-                            onInputChange={handleInputChange}
-                            style={styles.input}
-                        />
-                    </View>
-
-                </View>
-
-
-                <BtnPry title={'Registrar'} />
+                
+                <BtnPry title={'Registrar'} onPress={handleSubmit}/>
             </View>
         </View>
     );

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TextInput } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { MaterialIcons } from '@expo/vector-icons';
 import Btn from "../../../components/PrimaryButton";
 import { FontAwesome5 } from '@expo/vector-icons';
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, View, StyleSheet } from 'react-native';
-import Button from "../components/Button";
+import Button from "../components/TertiaryButton";
 
 const Settings = () => {
     return (
